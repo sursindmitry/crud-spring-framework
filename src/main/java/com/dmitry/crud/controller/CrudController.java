@@ -1,5 +1,8 @@
 package com.dmitry.crud.controller;
 
+import com.dmitry.crud.model.User;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +28,7 @@ public class CrudController {
         this.templateEngine = templateEngine;
     }
 
-    @GetMapping(value = "/")
+    @GetMapping("/")
     public String printWelcome() {
 
         Context context = new Context();
@@ -33,13 +36,23 @@ public class CrudController {
         return templateEngine.process("index", context);
     }
 
-    @GetMapping(value = "/create-user")
-    public String printCreateUser() {
+    @GetMapping("/create-user")
+    public String createUserPage() {
         Context context = new Context();
 
         return templateEngine.process("create-user", context);
     }
 
+    @GetMapping("/read-users")
+    public String readUserPage(){
+
+        List<User> users = crudService.getAll();
+
+        Context context = new Context();
+        context.setVariable("users", users);
+
+        return templateEngine.process("read-users", context);
+    }
 
     @PostMapping("/create")
     public ResponseEntity<String> create(@RequestBody CreateDto dto) {
@@ -49,12 +62,6 @@ public class CrudController {
         return new ResponseEntity<>("User Created", HttpStatus.OK);
     }
 
-//	@GetMapping("/{userId}")
-//	public String findUserById(@PathVariable Long userId,
-//							   Model model){
-//		model.addAttribute("user", crudService.getUser(userId));
-//
-//		return "index";
-//	}
+
 
 }

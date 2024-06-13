@@ -1,5 +1,6 @@
 package com.dmitry.crud.dao;
 
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
@@ -17,5 +18,10 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void save(User user) {
         entityManager.persist(user);
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        return entityManager.createQuery("FROM User", User.class).getResultList();
     }
 }

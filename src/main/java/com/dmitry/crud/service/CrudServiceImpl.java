@@ -1,5 +1,6 @@
 package com.dmitry.crud.service;
 
+import java.util.List;
 import org.springframework.stereotype.Service;
 import com.dmitry.crud.dao.UserDao;
 import com.dmitry.crud.dto.CreateDto;
@@ -15,11 +16,6 @@ public class CrudServiceImpl implements CrudService {
     }
 
     @Override
-    public Object getUser(Long userId) {
-        return null;
-    }
-
-    @Override
     public void create(CreateDto dto) {
         User user = new User();
         user.setName(dto.getName());
@@ -27,5 +23,10 @@ public class CrudServiceImpl implements CrudService {
         user.setEmail(dto.getEmail());
 
         userDao.save(user);
+    }
+
+    @Override
+    public List<User> getAll() {
+        return userDao.getAllUsers();
     }
 }
