@@ -31,11 +31,19 @@ public class WebController {
     }
 
     @GetMapping("/read-users")
-    public String readUsersPage(){
+    public String readUsersPage() {
 
         Context context = new Context();
 
         return templateEngine.process("read-users", context);
+    }
+
+    @GetMapping("/delete")
+    public String deleteUserPage() {
+
+        Context context = new Context();
+
+        return templateEngine.process("delete-user", context);
     }
 
 }

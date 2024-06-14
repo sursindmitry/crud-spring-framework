@@ -3,6 +3,7 @@ package com.dmitry.crud.controller;
 import com.dmitry.crud.dto.CreateDto;
 import com.dmitry.crud.model.User;
 import com.dmitry.crud.service.CrudService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,19 +12,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.thymeleaf.TemplateEngine;
 
 @RestController
 public class CrudController {
 
-    private CrudService crudService;
-    private final TemplateEngine templateEngine;
+    private final CrudService crudService;
 
 
     @Autowired
-    public CrudController(CrudService crudService, TemplateEngine templateEngine) {
+    public CrudController(CrudService crudService) {
         this.crudService = crudService;
-        this.templateEngine = templateEngine;
     }
 
     @PostMapping("/create")
@@ -34,12 +32,17 @@ public class CrudController {
         return new ResponseEntity<>("User Created", HttpStatus.OK);
     }
 
-    @GetMapping("/read-users/{userId}")
-    public ResponseEntity<User> readUsersPage( @PathVariable String userId){
+    @GetMapping("/read-user/{userId}")
+    public ResponseEntity<User> getUserById( @PathVariable String userId){
 
         User user = crudService.findUserById(Long.parseLong(userId));
 
        return ResponseEntity.ok(user);
+    }
+
+    @GetMapping("/read-all-users")
+    public List<User> getUsers(){
+        return crudService.getAll();
     }
 
 }
