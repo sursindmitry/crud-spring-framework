@@ -9,4 +9,6 @@ public interface CrudService {
     void create(CreateDto dto);
 
     List<User> getAll();
+
+    User findUserById(Long id);
 }

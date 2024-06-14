@@ -29,4 +29,9 @@ public class CrudServiceImpl implements CrudService {
     public List<User> getAll() {
         return userDao.getAllUsers();
     }
+
+    @Override
+    public User findUserById(Long id) {
+        return userDao.findUserById(id);
+    }
 }

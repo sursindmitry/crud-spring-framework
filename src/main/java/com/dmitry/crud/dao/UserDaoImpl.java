@@ -3,6 +3,7 @@ package com.dmitry.crud.dao;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 import com.dmitry.crud.model.User;
@@ -23,5 +24,14 @@ public class UserDaoImpl implements UserDao {
     @Override
     public List<User> getAllUsers() {
         return entityManager.createQuery("FROM User", User.class).getResultList();
+    }
+
+    @Override
+    public User findUserById(Long id) {
+        Query query = entityManager.createQuery("FROM User WHERE id=:id");
+
+        query.setParameter("id", id);
+
+        return (User) query.getSingleResult();
     }
 }

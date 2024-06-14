@@ -8,22 +8,28 @@
         body {
             background-color: #f8f9fa;
         }
+
         .container {
             margin-top: 50px;
         }
+
         h1 {
             margin-bottom: 30px;
         }
+
         table {
             background-color: #ffffff;
         }
+
         thead {
             background-color: #343a40;
             color: #ffffff;
         }
+
         tbody tr:hover {
             background-color: #f1f1f1;
         }
+
         .table-bordered {
             border: 1px solid #dee2e6;
         }
@@ -33,6 +39,12 @@
 <div class="container">
     <h1 class="text-center">Read users</h1>
     <a href="/">Back</a>
+    <form id="getUserForm" class="mb-4">
+        <div class="input-group">
+            <input type="text" id="userId" name="userId" class="form-control" placeholder="Enter User ID" required>
+            <button type="submit" class="btn btn-primary">Get User By ID</button>
+        </div>
+    </form>
     <table class="table table-bordered table-hover">
         <thead>
         <tr>
@@ -42,15 +54,49 @@
             <th>Email</th>
         </tr>
         </thead>
-        <tbody>
-        <tr th:each="user : ${users}">
-            <td th:text="${user.id}"></td>
-            <td th:text="${user.name}"></td>
-            <td th:text="${user.surname}"></td>
-            <td th:text="${user.email}"></td>
-        </tr>
+        <tbody id="userTableBody">
+        <!-- Данные пользователя будут вставлены сюда -->
         </tbody>
     </table>
 </div>
+<script>
+    document.getElementById('getUserForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+        const userId = document.getElementById('userId').value;
+        fetch(`/read-users/${userId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Network response was not ok');
+                }
+            })
+            .then(user => {
+                const userTableBody = document.getElementById('userTableBody');
+                userTableBody.innerHTML = `
+                <tr>
+                    <td>${user.id}</td>
+                    <td>${user.name}</td>
+                    <td>${user.surname}</td>
+                    <td>${user.email}</td>
+                </tr>
+            `;
+            })
+            .catch(error => {
+                const userTableBody = document.getElementById('userTableBody');
+                userTableBody.innerHTML = `
+                <tr>
+                    <td colspan="4" class="text-center text-danger">Error: ${error.message}</td>
+                </tr>
+            `;
+                console.error('There was a problem with the fetch operation:', error);
+            });
+    });
+</script>
 </body>
 </html>

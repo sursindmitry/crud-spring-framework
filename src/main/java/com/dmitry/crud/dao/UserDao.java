@@ -7,4 +7,6 @@ public interface UserDao {
     void save(User user);
 
     List<User> getAllUsers();
+
+    User findUserById(Long id);
 }
