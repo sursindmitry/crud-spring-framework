@@ -1,4 +1,4 @@
-package com.dmitry.crud.dto;
+package com.sursindmitry.crud.dto;
 
 
 public class CreateDto {

@@ -1,4 +1,4 @@
-package com.dmitry.crud.model;
+package com.sursindmitry.crud.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

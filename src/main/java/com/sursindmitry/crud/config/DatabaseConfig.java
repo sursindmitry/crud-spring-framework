@@ -1,4 +1,4 @@
-package com.dmitry.crud.config;
+package com.sursindmitry.crud.config;
 
 import java.util.Properties;
 import javax.sql.DataSource;
@@ -11,12 +11,12 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import com.dmitry.crud.model.User;
+import com.sursindmitry.crud.model.User;
 
 @Configuration
 @PropertySource("classpath:application.properties")
 @EnableTransactionManagement
-@ComponentScan(value = "com.dmitry.crud.model")
+@ComponentScan(value = "com.sursindmitry.crud.model")
 public class DatabaseConfig {
     private Environment env;
 

@@ -1,4 +1,4 @@
-package com.dmitry.crud.config;
+package com.sursindmitry.crud.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 

@@ -1,6 +1,6 @@
-package com.dmitry.crud.dao;
+package com.sursindmitry.crud.dao;
 
-import com.dmitry.crud.model.User;
+import com.sursindmitry.crud.model.User;
 import java.util.List;
 
 public interface UserDao {
@@ -11,4 +11,6 @@ public interface UserDao {
     User findUserById(Long id);
 
     void deleteUserById(Long userId);
+
+    void update(User user);
 }

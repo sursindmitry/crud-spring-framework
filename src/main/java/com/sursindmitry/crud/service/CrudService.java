@@ -1,7 +1,7 @@
-package com.dmitry.crud.service;
+package com.sursindmitry.crud.service;
 
-import com.dmitry.crud.dto.CreateDto;
-import com.dmitry.crud.model.User;
+import com.sursindmitry.crud.dto.CreateDto;
+import com.sursindmitry.crud.model.User;
 import java.util.List;
 
 public interface CrudService {
@@ -13,4 +13,6 @@ public interface CrudService {
     User findUserById(Long id);
 
     void deleteUserById(Long userId);
+
+    void update(User user);
 }
