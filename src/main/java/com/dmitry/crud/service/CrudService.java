@@ -11,4 +11,6 @@ public interface CrudService {
     List<User> getAll();
 
     User findUserById(Long id);
+
+    void deleteUserById(Long userId);
 }

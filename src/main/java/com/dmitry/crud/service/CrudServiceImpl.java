@@ -9,7 +9,7 @@ import com.dmitry.crud.model.User;
 @Service
 public class CrudServiceImpl implements CrudService {
 
-    private UserDao userDao;
+    private final UserDao userDao;
 
     public CrudServiceImpl(UserDao userDao) {
         this.userDao = userDao;
@@ -33,5 +33,14 @@ public class CrudServiceImpl implements CrudService {
     @Override
     public User findUserById(Long id) {
         return userDao.findUserById(id);
+    }
+
+    @Override
+    public void deleteUserById(Long userId) {
+        if (userId < 1){
+            throw new IllegalArgumentException("ID не может быть меньше нуля");
+        }
+
+        userDao.deleteUserById(userId);
     }
 }

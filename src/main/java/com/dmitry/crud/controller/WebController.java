@@ -38,12 +38,20 @@ public class WebController {
         return templateEngine.process("read-users", context);
     }
 
-    @GetMapping("/delete")
+    @GetMapping("/delete-user")
     public String deleteUserPage() {
 
         Context context = new Context();
 
         return templateEngine.process("delete-user", context);
+    }
+
+    @GetMapping("/update-user")
+    public String updateUserPage() {
+
+        Context context = new Context();
+
+        return templateEngine.process("update-user", context);
     }
 
 }

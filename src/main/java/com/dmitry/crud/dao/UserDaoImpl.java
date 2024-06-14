@@ -21,11 +21,13 @@ public class UserDaoImpl implements UserDao {
         entityManager.persist(user);
     }
 
+    @Transactional
     @Override
     public List<User> getAllUsers() {
         return entityManager.createQuery("FROM User", User.class).getResultList();
     }
 
+    @Transactional
     @Override
     public User findUserById(Long id) {
         Query query = entityManager.createQuery("FROM User WHERE id=:id");
@@ -33,5 +35,13 @@ public class UserDaoImpl implements UserDao {
         query.setParameter("id", id);
 
         return (User) query.getSingleResult();
+    }
+
+    @Transactional
+    @Override
+    public void deleteUserById(Long userId) {
+        Query query = entityManager.createQuery("DELETE User WHERE id = :userId");
+
+        query.setParameter("userId", userId).executeUpdate();
     }
 }
